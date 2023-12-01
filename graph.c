@@ -57,7 +57,7 @@ Graph *readGraphFromFile(FILE *file)
     return graph;
 }
 
-int main()
+int main1()
 {
     //open file
     FILE *file = fopen("test.txt", "r");
