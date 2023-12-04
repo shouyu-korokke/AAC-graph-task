@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "sequentialgreedyheuristicsearchalgorithm_backup.cpp": "c",
+        "dfs.cpp": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
