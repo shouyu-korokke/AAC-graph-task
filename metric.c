@@ -114,25 +114,6 @@ int calculateDistance(Graph* graph, int start, int end) {
             }
         }
 
-        //Node* temp = graph->array[current].head;
-        //while (temp) {
-        //    int adjacentVertex = temp->vertex;
-
-        //    if (!visited[adjacentVertex]) {
-        //        visited[adjacentVertex] = 1;
-        //        distance[adjacentVertex] = distance[current] + 1;
-        //        queue[++rear] = adjacentVertex;
-
-        //        if (adjacentVertex == end) {
-        //            int res = distance[adjacentVertex];
-        //            free(visited);
-        //            free(distance);
-        //            return res;
-        //        }
-        //    }
-
-        //    temp = temp->next;
-
 
     }
 
@@ -169,7 +150,7 @@ void calcSubset(int A[], int n, int subset[], int subsetSize, int index) {
         calcSubset(A, n, subset, subsetSize + 1, i + 1);
     }
 }
-
+//helper function for calcSubset
 void subsets(int A[], int n) {
     int* subset = (int*)malloc(MAX_VERTICES * sizeof(int));
     calcSubset(A, n, subset, 0, 0);
@@ -178,7 +159,6 @@ void subsets(int A[], int n) {
 
 // Check if the given subset is a resolving set for the graph
 bool isSubsetResolving(Graph* graph, int subset[], int subsetSize) {
-    // 遍历所有顶点，检查子集是否可以解析每个顶点
 
     int* dist_i = (int*)malloc(subsetSize * sizeof(int));
     int* dist_j = (int*)malloc(subsetSize * sizeof(int));
@@ -206,7 +186,7 @@ bool isSubsetResolving(Graph* graph, int subset[], int subsetSize) {
 }
 
 // Logic to generate all subsets and check if they are resolving sets
-void findResolvingSets(Graph* graph) {
+void findResolvingMinimalSets(Graph* graph) {
     printf("Resolving sets\n");
     for (int i = 0; i < subsetCount; i++) {
         int j = 0;
@@ -222,7 +202,7 @@ void findResolvingSets(Graph* graph) {
     }
 
 }
-
+//Reset all global variables
 void resetGlobals()
 {
     subsetCount = 0;
@@ -266,14 +246,18 @@ int main()
 
 
         //TODO
+        // declare a graph array
         int vertices[MAX_VERTICES];
         for (int n = 0; n < graph->numVertices; n++)
         {
             vertices[n] = n;
         }
+        //find its all subsets
         subsets(vertices, graph->numVertices);
-        findResolvingSets(graph);
-        printf("\nSize: %d\n", minResolvingSetSize);
+        //
+        findResolvingMinimalSets(graph);
+        //print metric size
+        printf("\nMetric Size: %d\n", minResolvingSetSize);
         printf("\n");
         freeGraph(graph);
     }
