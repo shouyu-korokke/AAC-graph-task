@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <windows.h>
+#define MAX_VERTICES 100  // Maximum number of vertices in a graph
+#define MAX_CLIQUES 100  // Maximum number of vertices in a graph
+#define SOME_MAX_DEPTH 100  // Maximum depth of recursion
 
 // void color(short x)	//change colour according to the parameters
 // {
@@ -58,37 +61,29 @@ void printClique(int* clique, int size) {
 }
 
 void DFS_findMaxCliques(int i, int size, int* temp_clique, int** max_cliques, int *num_max_cliques, int *max_size, int** adjMatrix, int N) {
-       
-    //check if the size of current clique is greater than max clique size.
-    if (size == *max_size) {
+    // Ensure the recursion doesn't go too deep
+    if (size >= SOME_MAX_DEPTH) return;
 
-        //The first clique print will be empty
-        printClique(temp_clique, size); 
-
-        for (int j = 0; j < size; j++) {
-        // if there are multiple cliques, then they will be stored in the max_cliques[][]
-            max_cliques[*num_max_cliques][j] = temp_clique[j];
-        }
-        //The number of maximal cliques
-        (*num_max_cliques)++; 
-    } 
-
-    else if (size > *max_size) {
+    if (size > *max_size) {
         *max_size = size;
         *num_max_cliques = 0;
-        printClique(temp_clique, size); 
-        for (int j = 0; j < size; j++) {
-            max_cliques[0][j] = temp_clique[j];
-        }
-        *num_max_cliques = 1;
     }
 
-    // The main part of DFS algorithm
-    // i = -1 then j = 0; i is for count recursion; 
-    // The initial size is 0, which will increase in the subsequent process.
+    if (size == *max_size) {
+        // Check if we're within the bounds of allocated memory
+        if (*num_max_cliques < MAX_CLIQUES) {
+            for (int j = 0; j < size; j++) {
+                // Check if we're within the bounds of the clique
+                if (j < MAX_VERTICES) {
+                    max_cliques[*num_max_cliques][j] = temp_clique[j];
+                }
+            }
+            (*num_max_cliques)++;
+        }
+    }
+
     for (int j = i + 1; j < N; j++) {
-        temp_clique[size] = j; //current vertex
-        //if isNot a clique, then check the next vertex, until finishing check the last vertex.
+        temp_clique[size] = j;
         if (isClique(size + 1, temp_clique, adjMatrix)) {
             DFS_findMaxCliques(j, size + 1, temp_clique, max_cliques, num_max_cliques, max_size, adjMatrix, N);
         }

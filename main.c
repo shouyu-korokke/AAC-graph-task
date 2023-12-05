@@ -1,23 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "graph.h"
+// #include "graph.h"
 #include "metric.h"
-#include "DFS.h"
-#include "SGH.h"
+// #include "DFS.h"
+//#include "SGH.h"
+#include "MCS.h"
 #include <time.h>
 
-// allocate memory
-int **allocateMatrix(int rows, int cols)
-{
-    int **matrix = (int **)malloc(rows * sizeof(int *));
-    for (int i = 0; i < rows; i++)
-    {
-        matrix[i] = (int *)malloc(cols * sizeof(int));
+void printAdjacencyMatrix(const Graph *g) {
+    printf("Adjacency Matrix of Modular Product Graph:\n");
+    for (int i = 0; i < g->numVertices; i++) {
+        for (int j = 0; j < g->numVertices; j++) {
+            printf("%d ", g->adjacencyMatrix[i][j]);
+        }
+        printf("\n");
     }
-    return matrix;
 }
 
-// free memory
+// free memory`
 void freeMatrix(int **matrix, int rows)
 {
     for (int i = 0; i < rows; i++)
@@ -87,10 +87,30 @@ void showInputGraph(Graph *graph, int i)
     }
 }
 
+void partD(Graph *g1, Graph *g2) {
+    printf("\nMaximum Common Subgraph (MCS)\n");
+    Graph *result = (Graph *)malloc(sizeof(Graph));  // Allocate memory for the result graph
+    if (result == NULL) {
+        printf("Error allocating memory for the result graph.\n");
+        // Handle memory allocation error, such as by exiting the program
+        exit(1);
+    }
+    modularProduct(g1, g2, result);
+    printAdjacencyMatrix(result);
+    DFS_mainFunction(result->adjacencyMatrix, result->numVertices);
+    // giSGHA_findClique(result->adjacencyMatrix, result->numVertices);
+    freeGraph(result);
+}
 
 int main()
 {
     FILE *file = fopen("input.txt", "r");
+    if (file == NULL)
+    {
+        printf("Error opening file.\n");
+        return 1;
+    }
+    FILE *file2 = fopen("input2.txt", "r");
     if (file == NULL)
     {
         printf("Error opening file.\n");
@@ -119,6 +139,25 @@ int main()
         printf("\n#######################################################\n");
     }
 
+    Graph *graph1 = readGraphFromFile(file2);
+
+    showInputGraph(graph1, 0);
+
+    Graph *graph2 = readGraphFromFile(file2);
+
+    showInputGraph(graph2, 1);
+
+    Graph *graph3 = readGraphFromFile(file2);
+
+    showInputGraph(graph3, 2);
+
+    partD(graph1, graph2);
+    partD(graph1, graph3);
+    partD(graph2, graph3);    
+
+    freeGraph(graph1);
+    freeGraph(graph2);
+    freeGraph(graph3);
     fclose(file);
     return 0;
 }
