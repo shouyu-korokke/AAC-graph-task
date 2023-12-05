@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graph.h"
+#include "size.h"
 #include "metric.h"
 #include "DFS.h"
 #include "SGH.h"
@@ -107,15 +108,28 @@ int main()
         Graph *graph = readGraphFromFile(file);
 
         showInputGraph(graph, i);
+        
+
+        printf("\n-------------------------------------------------------\n");
+        // Hong's part
+        partA(graph);
+
+
         printf("\n-------------------------------------------------------\n");
         // Liu's part
         partB(graph);
+
+
         printf("\n-------------------------------------------------------\n");
         // Wen's part
         partC(graph);
+
+
         printf("\n-------------------------------------------------------\n");
         // Mevin's part
         //partD(graph);
+
+        
         printf("\n#######################################################\n");
     }
 
