@@ -129,10 +129,11 @@ int main()
         // Mevin's part
         //partD(graph);
 
-        
+
         printf("\n#######################################################\n");
     }
 
     fclose(file);
+    system("pause");
     return 0;
 }
