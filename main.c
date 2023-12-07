@@ -5,18 +5,20 @@
 #include "metric.h"
 #include "DFS.h"
 #include "SGH.h"
+#include "MCS.h"
 #include <time.h>
 
-// allocate memory
-int **allocateMatrix(int rows, int cols)
-{
-    int **matrix = (int **)malloc(rows * sizeof(int *));
-    for (int i = 0; i < rows; i++)
-    {
-        matrix[i] = (int *)malloc(cols * sizeof(int));
+
+void printAdjacencyMatrix(const Graph *g) {
+    printf("Adjacency Matrix of Modular Product Graph:\n");
+    for (int i = 0; i < g->numVertices; i++) {
+        for (int j = 0; j < g->numVertices; j++) {
+            printf("%d ", g->adjacencyMatrix[i][j]);
+        }
+        printf("\n");
     }
-    return matrix;
 }
+
 
 // free memory
 void freeMatrix(int **matrix, int rows)
@@ -89,9 +91,33 @@ void showInputGraph(Graph *graph, int i)
 }
 
 
+void partD(Graph *g1, Graph *g2) {
+    printf("\nMaximum Common Subgraph (MCS)\n");
+    Graph *result = (Graph *)malloc(sizeof(Graph));  // Allocate memory for the result graph
+    if (result == NULL) {
+        printf("Error allocating memory for the result graph.\n");
+        // Handle memory allocation error, such as by exiting the program
+        exit(1);
+    }
+    modularProduct(g1, g2, result);
+    printf("Number of Vertices: %d\n", result->numVertices);
+    printAdjacencyMatrix(result);
+    //DFS_mainFunction(result->adjacencyMatrix, result->numVertices);
+    SGHA_findClique(result->adjacencyMatrix, result->numVertices);
+    freeGraph(result);
+}
+
+
+
 int main()
 {
     FILE *file = fopen("input.txt", "r");
+    if (file == NULL)
+    {
+        printf("Error opening file.\n");
+        return 1;
+    }
+    FILE *file2 = fopen("input2.txt", "r");
     if (file == NULL)
     {
         printf("Error opening file.\n");
@@ -131,7 +157,61 @@ int main()
 
 
         printf("\n#######################################################\n");
+        freeGraph(graph);
     }
+
+
+    // Mevin's part
+    Graph *graph1 = readGraphFromFile(file2);
+
+    // showInputGraph(graph1, 0);
+
+    Graph *graph2 = readGraphFromFile(file2);
+
+    // showInputGraph(graph2, 1);
+
+    Graph *graph3 = readGraphFromFile(file2);
+
+    // showInputGraph(graph3, 2);
+
+    Graph *graph4 = readGraphFromFile(file2);
+
+    // showInputGraph(graph4, 3);
+
+    Graph *graph5 = readGraphFromFile(file2);
+
+    // showInputGraph(graph5, 4);
+
+    Graph *graph6 = readGraphFromFile(file2);
+
+    // showInputGraph(graph6, 5);
+
+    //OUTPUT                       //DFS            //SGH
+    partD(graph1, graph1);      //(Works)      //(Workrks)
+    partD(graph1, graph2);      //(Works)      //(Workrks)
+    partD(graph1, graph3);      //(Exception)      //(Works)
+    partD(graph2, graph3);  //(Exception)   //(Works)
+    //partD(graph1, graph4);     //(Exception)       //(Works)
+    //partD(graph1, graph5);     //(Exception)       //(Works) 
+    //partD(graph1, graph6);     //(Exception)        //(Works) 
+    //partD(graph2, graph4);     //(Exception)       //(Works) 
+    //partD(graph2, graph5);  //(Exception)   //(Works)
+    //partD(graph2, graph6);     //(Exception)       //(Works) 
+    //partD(graph3, graph4);     //(Works)       //(Works) 
+    //partD(graph3, graph5);     //(Works)       //(Works) 
+    //partD(graph3, graph6);     //(Works)         //(Works) 
+    //partD(graph4, graph5); //(Hangs Infinitely)  //(Works)
+    //partD(graph4, graph6); //(Hangs Infinitely)  //(Works)
+    //partD(graph5, graph6); //(Hangs Infinitely) //(Works)
+
+
+    freeGraph(graph1);
+    freeGraph(graph2);
+    freeGraph(graph3); 
+    freeGraph(graph4);
+    freeGraph(graph5);
+    freeGraph(graph6);
+
 
     fclose(file);
     system("pause");
