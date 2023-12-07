@@ -121,12 +121,7 @@ int main()
         printf("Error opening file.\n");
         return 1;
     }
-    FILE *file2 = fopen("input2.txt", "r");
-    if (file == NULL)
-    {
-        printf("Error opening file.\n");
-        return 1;
-    }
+   
 
     int numGraphs;
     fscanf(file, "%d", &numGraphs);
