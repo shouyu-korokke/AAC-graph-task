@@ -3,7 +3,7 @@
 #include <windows.h>
 #define MAX_VERTICES 100  // Maximum number of vertices in a graph
 #define MAX_CLIQUES 100  // Maximum number of vertices in a graph
-#define SOME_MAX_DEPTH 100  // Maximum depth of recursion
+#define SOME_MAX_DEPTH 100 // Maximum depth of recursion
 
 // void color(short x)	//change colour according to the parameters
 // {

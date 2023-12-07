@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include "graph.h"
+#include "graph.h"
 #include "metric.h"
 // #include "DFS.h"
 //#include "SGH.h"
 #include "MCS.h"
 #include <time.h>
+//#include "MCSplit.h"
 
 void printAdjacencyMatrix(const Graph *g) {
     printf("Adjacency Matrix of Modular Product Graph:\n");
@@ -66,7 +67,7 @@ void partC(Graph *graph)
     printf("The results by DFS(precise approach).\n");
     DFS_mainFunction(graph->adjacencyMatrix, graph->numVertices);
     end = clock();
-    printf("Program SGHA_findClique %f seconds to execute\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+    printf("Program DFS_mainFunction %f seconds to execute\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 }
 
 void showInputGraph(Graph *graph, int i)
@@ -96,9 +97,10 @@ void partD(Graph *g1, Graph *g2) {
         exit(1);
     }
     modularProduct(g1, g2, result);
+    printf("Number of Vertices: %d\n", result->numVertices);
     printAdjacencyMatrix(result);
-    DFS_mainFunction(result->adjacencyMatrix, result->numVertices);
-    // giSGHA_findClique(result->adjacencyMatrix, result->numVertices);
+    //DFS_mainFunction(result->adjacencyMatrix, result->numVertices);
+    SGHA_findClique(result->adjacencyMatrix, result->numVertices);
     freeGraph(result);
 }
 
@@ -134,30 +136,58 @@ int main()
         // Wen's part
         partC(graph);
         printf("\n-------------------------------------------------------\n");
-        // Mevin's part
-        //partD(graph);
+        
         printf("\n#######################################################\n");
     }
-
+    // Mevin's part
     Graph *graph1 = readGraphFromFile(file2);
 
-    showInputGraph(graph1, 0);
+    // showInputGraph(graph1, 0);
 
     Graph *graph2 = readGraphFromFile(file2);
 
-    showInputGraph(graph2, 1);
+    // showInputGraph(graph2, 1);
 
     Graph *graph3 = readGraphFromFile(file2);
 
-    showInputGraph(graph3, 2);
+    // showInputGraph(graph3, 2);
 
-    partD(graph1, graph2);
-    partD(graph1, graph3);
-    partD(graph2, graph3);    
+    Graph *graph4 = readGraphFromFile(file2);
+
+    // showInputGraph(graph4, 3);
+
+    Graph *graph5 = readGraphFromFile(file2);
+
+    // showInputGraph(graph5, 4);
+
+    Graph *graph6 = readGraphFromFile(file2);
+
+    // showInputGraph(graph6, 5);
+
+    //OUTPUT                       //DFS            //SGH
+    partD(graph1, graph2);      //(Works)      //(Hangs Infinitely)
+    // partD(graph1, graph3);      //(Works)      //(Hangs Infinitely)
+    // partD(graph2, graph3);  //(Exception)   //(Hangs Infinitely)
+    // partD(graph1, graph4);     //(Works)       /(Hangs Infinitely)
+    // partD(graph1, graph5);     //(Works)       //(Hangs Infinitely) 
+    // partD(graph1, graph6);     //(Works)        //(Hangs Infinitely) 
+    // partD(graph2, graph4);     //(Works)       //(Hangs Infinitely) 
+    // partD(graph2, graph5);  //(Exception)   //(Hangs Infinitely)
+    // partD(graph2, graph6);     //(Works)       //(Hangs Infinitely) 
+    // partD(graph3, graph4);     //(Works)       //(Hangs Infinitely) 
+    // partD(graph3, graph5);     //(Works)       //(Hangs Infinitely) 
+    // partD(graph3, graph6);     //(Works)         //(Hangs Infinitely) 
+    // partD(graph4, graph5); //(Hangs Infinitely)  //(Hangs Infinitely)
+    // partD(graph4, graph6); //(Hangs Infinitely)  //(Hangs Infinitely)
+    // partD(graph5, graph6); //(Hangs Infinitely) //(Hangs Infinitely)
+
 
     freeGraph(graph1);
     freeGraph(graph2);
-    freeGraph(graph3);
+    freeGraph(graph3); 
+    freeGraph(graph4);
+    freeGraph(graph5);
+    freeGraph(graph6);
     fclose(file);
     return 0;
 }
