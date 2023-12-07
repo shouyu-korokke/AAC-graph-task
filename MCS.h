@@ -76,7 +76,6 @@ void makeGraphSimple(Graph *g) {
 
 
 void modularProduct(const Graph *g1, const Graph *g2, Graph *result) {
-    
     int numVertices = g1->numVertices * g2->numVertices;
     initializeGraph(result, numVertices);
 
@@ -84,13 +83,12 @@ void modularProduct(const Graph *g1, const Graph *g2, Graph *result) {
         for (int j = 0; j < g2->numVertices; j++) {
             for (int k = 0; k < g1->numVertices; k++) {
                 for (int l = 0; l < g2->numVertices; l++) {
-                    if ((g1->adjacencyMatrix[i][k] == g2->adjacencyMatrix[j][l]) && // Check for equal adjacency
-                    ((g1->adjacencyMatrix[i][k] == 1 && g2->adjacencyMatrix[j][l] == 1) || // Both adjacent
-                    (g1->adjacencyMatrix[i][k] == 0 && g2->adjacencyMatrix[j][l] == 0))) // Both non-adjacent
-                    {
-                        addEdge(result, i * g2->numVertices + j, k * g2->numVertices + l);
+                   if ((g1->adjacencyMatrix[i][k] == 1 && g2->adjacencyMatrix[j][l] == 1 && i != k && j != l) ||
+                        (g1->adjacencyMatrix[i][k] == 0 && g2->adjacencyMatrix[j][l] == 0 && i != k && j != l)) {
+                        int vertex1 = i * g2->numVertices + j;
+                        int vertex2 = k * g2->numVertices + l;
+                        addEdge(result, vertex1, vertex2);
                     }
-
                 }
             }
         }
@@ -100,6 +98,7 @@ void modularProduct(const Graph *g1, const Graph *g2, Graph *result) {
         makeGraphSimple(result);
     }
 }
+
 
 
 

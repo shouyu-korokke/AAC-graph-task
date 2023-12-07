@@ -99,8 +99,8 @@ void partD(Graph *g1, Graph *g2) {
     modularProduct(g1, g2, result);
     printf("Number of Vertices: %d\n", result->numVertices);
     printAdjacencyMatrix(result);
-    //DFS_mainFunction(result->adjacencyMatrix, result->numVertices);
-    SGHA_findClique(result->adjacencyMatrix, result->numVertices);
+    DFS_mainFunction(result->adjacencyMatrix, result->numVertices);
+    //SGHA_findClique(result->adjacencyMatrix, result->numVertices);
     freeGraph(result);
 }
 
@@ -165,15 +165,16 @@ int main()
     // showInputGraph(graph6, 5);
 
     //OUTPUT                       //DFS            //SGH
-    partD(graph1, graph2);      //(Works)      //(Workrks)
-    // partD(graph1, graph3);      //(Works)      //(Works)
-    // partD(graph2, graph3);  //(Exception)   //(Works)
-    // partD(graph1, graph4);     //(Works)      //(Hangs Infinitely)
-    // partD(graph1, graph5);     //(Works)       //(Works) 
-    // partD(graph1, graph6);     //(Works)        //(Works) 
-    // partD(graph2, graph4);     //(Works)       //(Works) 
+    //partD(graph1, graph1);      //(Works)      //(Workrks)
+    //partD(graph1, graph2);      //(Works)      //(Workrks)
+    // partD(graph1, graph3);      //(Exception)      //(Works)
+    //partD(graph2, graph3);  //(Exception)   //(Works)
+    //partD(graph1, graph4);     //(Exception)       //(Works)
+    // partD(graph1, graph5);     //(Exception)       //(Works) 
+    // partD(graph1, graph6);     //(Exception)        //(Works) 
+    // partD(graph2, graph4);     //(Exception)       //(Works) 
     // partD(graph2, graph5);  //(Exception)   //(Works)
-    // partD(graph2, graph6);     //(Works)       //(Works) 
+    // partD(graph2, graph6);     //(Exception)       //(Works) 
     // partD(graph3, graph4);     //(Works)       //(Works) 
     // partD(graph3, graph5);     //(Works)       //(Works) 
     // partD(graph3, graph6);     //(Works)         //(Works) 
