@@ -102,8 +102,12 @@ void partD(Graph *g1, Graph *g2) {
     modularProduct(g1, g2, result);
     printf("Number of Vertices: %d\n", result->numVertices);
     printAdjacencyMatrix(result);
+    clock_t start, end;
+    start = clock();
     //DFS_mainFunction(result->adjacencyMatrix, result->numVertices);
     SGHA_findClique(result->adjacencyMatrix, result->numVertices);
+     end = clock();
+    printf("Maximum Common Subgraph %f seconds to execute\n", ((double)(end - start)) / CLOCKS_PER_SEC);
     freeGraph(result);
 }
 
@@ -152,8 +156,7 @@ int main()
 
 
         printf("\n-------------------------------------------------------\n");
-        // Mevin's part
-        //partD(graph);
+        
 
 
         printf("\n#######################################################\n");
@@ -162,47 +165,32 @@ int main()
 
 
     // Mevin's part
-    Graph *graph1 = readGraphFromFile(file2);
+    rewind(file);
+    fscanf(file, "%d", &numGraphs);
+    Graph *graph1 = readGraphFromFile(file);
+    Graph *graph2 = readGraphFromFile(file);
+    Graph *graph3 = readGraphFromFile(file);
+    Graph *graph4 = readGraphFromFile(file);
+    Graph *graph5 = readGraphFromFile(file);
+    Graph *graph6 = readGraphFromFile(file);
 
-    // showInputGraph(graph1, 0);
-
-    Graph *graph2 = readGraphFromFile(file2);
-
-    // showInputGraph(graph2, 1);
-
-    Graph *graph3 = readGraphFromFile(file2);
-
-    // showInputGraph(graph3, 2);
-
-    Graph *graph4 = readGraphFromFile(file2);
-
-    // showInputGraph(graph4, 3);
-
-    Graph *graph5 = readGraphFromFile(file2);
-
-    // showInputGraph(graph5, 4);
-
-    Graph *graph6 = readGraphFromFile(file2);
-
-    // showInputGraph(graph6, 5);
-
-    //OUTPUT                       //DFS            //SGH
-    partD(graph1, graph1);      //(Works)      //(Workrks)
-    partD(graph1, graph2);      //(Works)      //(Workrks)
-    partD(graph1, graph3);      //(Exception)      //(Works)
-    partD(graph2, graph3);  //(Exception)   //(Works)
+    //OUTPUT                       //DFS                //SGH
+    partD(graph1, graph1);      //(Works)            //(Workrks)
+    partD(graph1, graph2);      //(Works)           //(Workrks)
+    partD(graph1, graph3);      //(Exception)          //(Works)
+    partD(graph2, graph3);       //(Exception)       //(Works)
     //partD(graph1, graph4);     //(Exception)       //(Works)
     //partD(graph1, graph5);     //(Exception)       //(Works) 
     //partD(graph1, graph6);     //(Exception)        //(Works) 
     //partD(graph2, graph4);     //(Exception)       //(Works) 
-    //partD(graph2, graph5);  //(Exception)   //(Works)
+    //partD(graph2, graph5);    //(Exception)         //(Works)
     //partD(graph2, graph6);     //(Exception)       //(Works) 
-    //partD(graph3, graph4);     //(Works)       //(Works) 
-    //partD(graph3, graph5);     //(Works)       //(Works) 
-    //partD(graph3, graph6);     //(Works)         //(Works) 
-    //partD(graph4, graph5); //(Hangs Infinitely)  //(Works)
-    //partD(graph4, graph6); //(Hangs Infinitely)  //(Works)
-    //partD(graph5, graph6); //(Hangs Infinitely) //(Works)
+    //partD(graph3, graph4);     //(Exception)       //(Works) 
+    //partD(graph3, graph5);     //(Exception)       //(Works) 
+    //partD(graph3, graph6);     //(Exception)       //(Works) 
+    //partD(graph4, graph5); //(Hangs Infinitely)   //(Works)
+    //partD(graph4, graph6); //(Hangs Infinitely)   //(Works)
+    //partD(graph5, graph6); //(Hangs Infinitely)   //(Works)
 
 
     freeGraph(graph1);
