@@ -12,14 +12,12 @@ typedef struct
 // Function to allocate memory for a 2D matrix (adjacency matrix)
 int **allocateMatrix(int rows, int cols)
 {
-    // Allocate memory for an array of pointers (each pointer will point to a row)
     int **matrix = (int **)malloc(rows * sizeof(int *));
     for (int i = 0; i < rows; i++)
     {
-        // Allocate memory for each row (array of ints)
         matrix[i] = (int *)malloc(cols * sizeof(int));
     }
-    return matrix; // Return the pointer to the 2D array
+    return matrix; 
 }
 
 
