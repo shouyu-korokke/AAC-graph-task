@@ -92,7 +92,7 @@ void storeSubset(int subset[], int subsetSize)
 // backtraking algorithm to find all subsets of graph array
 void calcSubset(int A[], int n, int subset[], int subsetSize, int index)
 {
-    // printSubsets(subset, subsetSize);
+     printSubsets(subset, subsetSize);
     storeSubset(subset, subsetSize);
     for (int i = index; i < n; i++)
     {
