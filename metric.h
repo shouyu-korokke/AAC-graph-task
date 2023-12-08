@@ -143,23 +143,34 @@ bool isSubsetResolving(Graph *graph, int subset[], int subsetSize)
 }
 
 // Logic to generate all subsets and check if they are resolving sets
-void findResolvingMinimalSets(Graph *graph)
-{
+void findResolvingMinimalSets(Graph* graph) {
     printf("Resolving sets\n");
-    for (int i = 0; i < subsetCount; i++)
-    {
+    for (int i = 0; i < subsetCount; i++) {
         int j = 0;
-        // calculate the size of current subsets
-        while (allSubsets[i][j] != -1 && j < graph->numVertices)
-        {
+        // calculate the current size of subset
+        while (allSubsets[i][j] != -1 && j < graph->numVertices) {
             j++;
         }
-        if (isSubsetResolving(graph, allSubsets[i], j))
-        {
-             printSubsets(allSubsets[i], j);
-            minResolvingSetSize = j;
-            memcpy(minResolvingSet, allSubsets[i], j * sizeof(int));
+        if (isSubsetResolving(graph, allSubsets[i], j)) {
+            printSubsets(allSubsets[i], j);
+
+            // update minResolvingSetSize only when current subset size is smaller than minResolvingSetSize
+            if (j < minResolvingSetSize) {
+                minResolvingSetSize = j;
+                memcpy(minResolvingSet, allSubsets[i], j * sizeof(int));
+            }
         }
+    }
+
+    // print minResolvingSets 
+    if (minResolvingSetSize < INT_MAX) {
+        printf("Minimum Resolving Set: ");
+        for (int i = 0; i < minResolvingSetSize; i++) {
+            printf("%d ", minResolvingSet[i]);
+        }
+        printf("\nSize: %d\n", minResolvingSetSize);
+    } else {
+        printf("No resolving set found.\n");
     }
 }
 // Reset all global variables
