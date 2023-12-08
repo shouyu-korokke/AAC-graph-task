@@ -36,7 +36,6 @@ void freeGraph(Graph *graph)
     free(graph);
 }
 
-// read a graph
 Graph *readGraphFromFile(FILE *file)
 {
     Graph *graph = (Graph *)malloc(sizeof(Graph));
@@ -50,12 +49,9 @@ Graph *readGraphFromFile(FILE *file)
         }
     }
 
-    // add code here if additional info needed
-
     return graph;
 }
 
-// tool for PartC
 void partC(Graph *graph)
 {
     clock_t start, end;
@@ -169,24 +165,23 @@ int main()
     Graph *graph5 = readGraphFromFile(file);
     Graph *graph6 = readGraphFromFile(file);
 
-    //OUTPUT                       //DFS                //SGH
-    partD(graph1, graph1);      //(Works)            //(Workrks)
-    partD(graph1, graph2);      //(Works)           //(Workrks)
-    partD(graph1, graph3);      //(Exception)          //(Works)
-    partD(graph2, graph3);       //(Exception)       //(Works)
-    //partD(graph1, graph4);     //(Exception)       //(Works)
-    //partD(graph1, graph5);     //(Exception)       //(Works) 
-    //partD(graph1, graph6);     //(Exception)        //(Works) 
-    //partD(graph2, graph4);     //(Exception)       //(Works) 
-    //partD(graph2, graph5);    //(Exception)         //(Works)
-    //partD(graph2, graph6);     //(Exception)       //(Works) 
-    //partD(graph3, graph4);     //(Exception)       //(Works) 
-    //partD(graph3, graph5);     //(Exception)       //(Works) 
-    //partD(graph3, graph6);     //(Exception)       //(Works) 
-    //partD(graph4, graph5); //(Hangs Infinitely)   //(Works)
-    //partD(graph4, graph6); //(Hangs Infinitely)   //(Works)
-    //partD(graph5, graph6); //(Hangs Infinitely)   //(Works)
-
+    
+    partD(graph1, graph1);                 
+    partD(graph1, graph2);                
+    partD(graph1, graph3);                
+    partD(graph2, graph3);              
+    //partD(graph1, graph4);            
+    //partD(graph1, graph5);            
+    //partD(graph1, graph6);             
+    //partD(graph2, graph4);            
+    //partD(graph2, graph5);             
+    //partD(graph2, graph6);            
+    //partD(graph3, graph4);            
+    //partD(graph3, graph5);            
+    //partD(graph3, graph6);            
+    //partD(graph4, graph5);   
+    //partD(graph4, graph6);   
+    //partD(graph5, graph6);   
 
     freeGraph(graph1);
     freeGraph(graph2);
