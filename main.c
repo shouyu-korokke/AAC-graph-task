@@ -65,7 +65,7 @@ void partC(Graph *graph)
     printf("The results by DFS(precise approach).\n");
     DFS_mainFunction(graph->adjacencyMatrix, graph->numVertices);
     end = clock();
-    printf("Program SGHA_findClique %f seconds to execute\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+    printf("Program DFS_mainFunction %f seconds to execute\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 }
 
 void showInputGraph(Graph *graph, int i)
@@ -165,23 +165,54 @@ int main()
     Graph *graph5 = readGraphFromFile(file);
     Graph *graph6 = readGraphFromFile(file);
 
-    
-    partD(graph1, graph1);                 
-    partD(graph1, graph2);                
-    partD(graph1, graph3);                
-    partD(graph2, graph3);              
-    //partD(graph1, graph4);            
-    //partD(graph1, graph5);            
-    //partD(graph1, graph6);             
-    //partD(graph2, graph4);            
-    //partD(graph2, graph5);             
-    //partD(graph2, graph6);            
-    //partD(graph3, graph4);            
-    //partD(graph3, graph5);            
-    //partD(graph3, graph6);            
+    printf("Graph 1 and Graph 1");
+    partD(graph1, graph1);  
+    printf("\n-------------------------------------------------------\n");
+    printf("Graph 1 and Graph 2");               
+    partD(graph1, graph2);        
+    printf("\n-------------------------------------------------------\n");
+    printf("Graph 1 and Graph 3");        
+    partD(graph1, graph3);        
+    printf("\n-------------------------------------------------------\n");
+    printf("Graph 2 and Graph 3");        
+    partD(graph2, graph3);     
+    printf("\n-------------------------------------------------------\n");
+    //printf("Graph 1 and Graph 4");         
+    //partD(graph1, graph4);   
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 1 and Graph 5");           
+    //partD(graph1, graph5);          
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 1 and Graph 6");    
+    //partD(graph1, graph6);          
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 2 and Graph 4");     
+    //partD(graph2, graph4);          
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 2 and Graph 5");    
+    //partD(graph2, graph5);          
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 2 and Graph 6");     
+    //partD(graph2, graph6);          
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 3 and Graph 4");    
+    //partD(graph3, graph4);          
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 3 and Graph 5");    
+    //partD(graph3, graph5);          
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 3 and Graph 6");    
+    //partD(graph3, graph6);          
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 4 and Graph 5");    
     //partD(graph4, graph5);   
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 4 and Graph 6");  
     //partD(graph4, graph6);   
+    // printf("\n-------------------------------------------------------\n");
+    //printf("Graph 5 and Graph 6");  
     //partD(graph5, graph6);   
+    // printf("\n-------------------------------------------------------\n");
 
     freeGraph(graph1);
     freeGraph(graph2);
