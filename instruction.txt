@@ -1,5 +1,7 @@
 Compile with standard C compiler. Apart from "windows.h", no external library or compile option is required.
-In text file "input.txt" is the input graph set for all the parts. Uncomment "partD()" lines in "main()" before compiling to specify which input graphs to perform MCS on, by default it's graph1-graph1, graph1-graph2, graph1-graph3, and graph2-graph3.
+In text file "input.txt", there are 6 undirected graphs of various sizes. This is the input graph set for all the parts. 
+
+Uncomment "partD()" lines in "main()" before compiling to specify which input graphs to perform MCS on, by default it's graph1-graph1, graph1-graph2, graph1-graph3, and graph2-graph3.
 
 The output will be put to stdout in the following format:
 
