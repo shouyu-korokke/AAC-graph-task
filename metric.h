@@ -172,6 +172,7 @@ void resetGlobals()
 
 void partB(Graph *graph)
 {
+    resetGlobals();
     //  declare a graph array
     int vertices[MAX_VERTICES];
     for (int n = 0; n < graph->numVertices; n++)
