@@ -1,0 +1,34 @@
+Compile with standard C compiler. Apart from "windows.h", no external library or compile option is required.
+In text file "input.txt" is the input graph set for all the parts. Uncomment "partD()" lines in "main()" before compiling to specify which input graphs to perform MCS on, by default it's graph1-graph1, graph1-graph2, graph1-graph3, and graph2-graph3.
+
+The output will be put to stdout in the following format:
+
+
+
+REPEAT FOR EACH GRAPH IN "input.txt"
+#######################################################
+Graph no.X:
+Number of Vertices: V
+Adjacency Matrix:
+
+-------------------------------------------------------
+Graph size: S
+
+-------------------------------------------------------
+Resolving sets
+
+Metric Size: M
+
+
+-------------------------------------------------------
+The results by SequantialGreedyHeuristicSearchAlgorithm(approximate approach)
+...
+The results by DFS(precise approach)
+...
+-------------------------------------------------------
+
+#######################################################
+
+
+
+MCS outputs
